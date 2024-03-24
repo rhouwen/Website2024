@@ -1,4 +1,5 @@
-import app, db
+import app
+from __init__ import db
 from flask import render_template, redirect, request, url_for, flash
 from flask_login import login_user, login_required, logout_user
 from models import User
