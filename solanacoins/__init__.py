@@ -10,13 +10,15 @@ login_manager = LoginManager()
 app = Flask(__name__)
 
 # Vaak worden deze coderegels in een apart config.py-bestand ondergebracht
-app.config['SECRET_KEY'] = 'mijngeheimesleutel'
+app.config['SECRET_KEY'] = 'DITISeengeheimeSLEUTELhasuhwenc[wec3324#(*$&(#@)*$)]'
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 Migrate(app, db)
+
+app.app_context().push()
 
 # De app wordt bekend gemaakt bij de Loginmanager
 login_manager.init_app(app)
