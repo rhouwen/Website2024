@@ -2,7 +2,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo
 from wtforms import ValidationError
-from models import User
+from solanacoins.models import User
+
 
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
@@ -11,16 +12,19 @@ class LoginForm(FlaskForm):
 
 
 class RegistrationForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(),Email()])
+    email = StringField('Email', validators=[DataRequired(), Email()])
     username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired(), EqualTo('pass_confirm',    message='Wachtwoorden moeten overeenkomen!')])
+    password = PasswordField('Password',
+                             validators=[DataRequired(), EqualTo('pass_confirm', message='Passwords Must Match!')])
     pass_confirm = PasswordField('Confirm password', validators=[DataRequired()])
-    submit = SubmitField('Leg vast!')
+    submit = SubmitField('Registreer!')
 
-    def validate_email(self, field):
+    def check_email(self, field):
+        # Check of het e-mailadres al in de database voorkomt!
         if User.query.filter_by(email=field.data).first():
-            raise ValidationError('Dit e-mailadres is reeds geregistreerd')
-    
-    def validate_username(self, field):
+            raise ValidationError('Dit e-mailadres staat al geregistreerd!')
+
+    def check_username(self, field):
+        # Check of de gebruikersnaam nog niet vergeven is!
         if User.query.filter_by(username=field.data).first():
-            raise ValidationError('Deze gebruikersnaam is al in gebruik, probeer een ander naam!')
+            raise ValidationError('Deze gebruikersnaam is al vergeven, kies een andere naam!')

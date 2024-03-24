@@ -1,14 +1,17 @@
-from app import db, login_manager
-from werkzeug.security import generate_password_hash,check_password_hash
+from solanacoins import db, login_manager
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
+
+# De user_loader decorator zorgt voor de flask-login voor de huidige gebruiker
+# en haalt zijn/haar id op.
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
 
 
 class User(db.Model, UserMixin):
-    
+    # Maak een tabel aan in de database
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
