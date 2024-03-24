@@ -1,9 +1,8 @@
-import app
-from __init__ import db
+from solanacoins import app, db
 from flask import render_template, redirect, request, url_for, flash
 from flask_login import login_user, login_required, logout_user
-from models import User
-from forms import LoginForm, RegistrationForm
+from solanacoins.models import User
+from solanacoins.forms import LoginForm, RegistrationForm
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
