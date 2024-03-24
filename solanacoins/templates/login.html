@@ -1,9 +1,33 @@
+
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/login.css') }}">
+
+
 {% extends "base.html" %}
 {% block content %}
-<form method="POST">
-    {{ form.hidden_tag() }}
-    {{ form.email.label }} {{ form.email() }}
-    {{ form.password.label }} {{ form.password() }}
-    {{ form.submit() }}
-</form>
+
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img src="{{ url_for('static',filename='sollogo.png') }}" id="icon" alt="User Icon"/>
+    </div>
+
+    <!-- Login Form -->
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.email(class_="fadeIn second", size=32, placeholder="E-mail", id="login") }}
+
+
+        {{ form.password(class_="fadeIn third", size=32, placeholder="Wachtwoord") }}
+      
+        {{ form.submit(class_="fadeIn fourth", value="Log In") }}
+     
+    </form>
+
+  </div>
+</div>
 {% endblock %}
