@@ -11,19 +11,38 @@
     <title></title>
 </head>
 <body>
-<ul class="nav">
-
-    <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('home') }}">Home</a>
-    </li>
-    {% if current_user.is_authenticated %}
-    <li class="nav-link"><a href="{{ url_for('logout') }}">Uitloggen</a></li>
-    {% else %}
-    <li class="nav-link"><a href="{{ url_for('login') }}">Inloggen</a></li>
-    <li class="nav-link"><a href="{{ url_for('register') }}">Registreren</a></li>
-    {% endif %}
-
-</ul>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid"> <!-- Voeg container-fluid toe -->
+          <a class="navbar-brand" href="#">Solcoin</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+      
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto"> <!-- Gebruik 'ml-auto' voor uitlijning naar rechts -->
+              {% if current_user.is_authenticated %}
+              <li class="nav-item active">
+                <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('login') }}">Logout</a>
+              </li>
+              {% else %}
+              <li class="nav-item active">
+                <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('register') }}">Registreren</a>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div> <!-- Sluit container-fluid -->
+      </nav>
+      
 {% block content %}
 
 {% endblock %}
