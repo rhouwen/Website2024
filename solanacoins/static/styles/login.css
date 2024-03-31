@@ -2,7 +2,7 @@
 
 
 html {
-    background-color: #56baed;
+    background-color: #0d6efd;
   }
   
   body {
@@ -11,7 +11,7 @@ html {
   }
   
   a {
-    color: #92badd;
+    color: #0d6efd;
     display:inline-block;
     text-decoration: none;
     font-weight: 400;
@@ -74,7 +74,7 @@ html {
   
   h2.active {
     color: #0d0d0d;
-    border-bottom: 2px solid #5fbae9;
+    border-bottom: 2px solid #0d6efd;
   }
   
   
@@ -82,7 +82,7 @@ html {
 
   
   input[type=button], input[type=submit], input[type=reset]  {
-    background-color: #56baed;
+    background-color: #0d6efd;
     border: none;
     color: white;
     padding: 15px 80px;
@@ -104,7 +104,7 @@ html {
   }
   
   input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
-    background-color: #39ace7;
+    background-color: #0d6efd;
   }
   
   input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
@@ -139,7 +139,7 @@ html {
 
   input[type=text]:focus, input[type=password]:focus {
     background-color: #fff;
-    border-bottom: 2px solid #5fbae9;
+    border-bottom: 2px solid #0d6efd;
   }
   
   input[type=text]:placeholder, input[type=password]:placeholder {
@@ -235,7 +235,7 @@ html {
     bottom: -10px;
     width: 0;
     height: 2px;
-    background-color: #56baed;
+    background-color: #0d6efd;
     content: "";
     transition: width 0.2s;
   }
@@ -259,4 +259,5 @@ html {
   #icon {
     width:50%;
   }
+  
   
