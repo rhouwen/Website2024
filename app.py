@@ -41,7 +41,14 @@ def delete_coin(coin_id):
     else:
         return redirect(url_for('welkom', error='true'))
 
-
+@app.route('/update_coin/<int:coin_id>', methods=['POST'])
+@login_required
+def update_coin(coin_id):
+    coin = SolanaCoin.query.get_or_404(coin_id)
+    coin.ticker = request.form['ticker']
+    coin.name = request.form['name']
+    db.session.commit()
+    return redirect(url_for('welkom'))
 
 @app.route('/logout')
 @login_required

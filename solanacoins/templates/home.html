@@ -1,6 +1,7 @@
 {% extends "base.html" %}
+
+
 {% block content %}
-<!-- Jumbotron -->
 <div class="p-5 text-center bg-image rounded-0 position-relative" style="
     background-image: url('https://www.analyticsinsight.net/wp-content/uploads/2023/10/Screenshot-2023-10-19-142942.png');
     height: 400px;
@@ -15,19 +16,25 @@
   </div>
 </div>
 
-<div class="media">
-  <div class="media-left" style="margin-left: 310px; margin-top: 30px; margin-right: 10px">
-    <img src="https://image.coinpedia.org/wp-content/uploads/2024/02/08111153/sol-bull.webp" class="media-object" style="width:600px">
-  </div>
-  <div class="media-body" style="margin-right: 310px; margin-top: 30px">
-    <h4 class="media-heading">Waarom zou ik Solana memecoins traden?</h4>
-    <p><strong>Solana heeft lage transactiekosten:</strong> in vergelijking met andere blockchains zoals Ethereum, heeft Solana erg lage transactiekosten. Dit zorgt voor een lage instap drempel.
-      <br><br> <strong>Solana heeft een groeiend ecosysteem:</strong> het aantal gebruikers op Solana groeit per dag, dit zorgt voor veel nieuw geld, hierdoor is er veel liquiditeit in onder andere memecoins. 
-      <br><br> <strong>Elke dag nieuwe kansen:</strong> elke dag gaan er meerdere munten x5, x10 en soms zelfs x100 of hoger. 
-    </p>
+<div class="container my-5">
+  <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+    <div class="col-10 col-sm-8 col-lg-6">
+      <img src="https://image.coinpedia.org/wp-content/uploads/2024/02/08111153/sol-bull.webp" class="d-block mx-lg-auto img-fluid" alt="Solana Bull" loading="lazy">
+    </div>
+    <div class="col-lg-6">
+      <h4 class="display-6 fw-bold lh-1 mb-3">Waarom zou ik Solana memecoins traden?</h4>
+      <p class="lead">
+        <strong>Solana heeft lage transactiekosten:</strong> in vergelijking met andere blockchains zoals Ethereum, heeft Solana erg lage transactiekosten. Dit zorgt voor een lage instapdrempel.
+      </p>
+      <p class="lead">
+        <strong>Solana heeft een groeiend ecosysteem:</strong> het aantal gebruikers op Solana groeit per dag, wat zorgt voor veel nieuw geld en veel liquiditeit in onder andere memecoins. 
+      </p>
+      <p class="lead">
+        <strong>Elke dag nieuwe kansen:</strong> elke dag zijn er munten die in waarde verveelvoudigen, soms zelfs x100 of hoger.
+      </p>
+    </div>
   </div>
 </div>
-<hr>
 
 
 <div class="container" style="padding: 20px;">
@@ -75,7 +82,7 @@
 <style>
    .accordion-button {
      background-color: #0d6efd;
-     color: #fff; /* text color */
+     color: #fff; 
    }
 
    .accordion-button:hover {
@@ -84,8 +91,8 @@
 
    .accordion-button:not(.collapsed),
    .accordion-button:focus {
-     background-color: #0d6efd; /* background color when accordion is expanded or focused */
-     color: #fff; /* text color when accordion is expanded or focused */
+     background-color: #0d6efd; 
+     color: #fff; 
    }
 </style>
 
