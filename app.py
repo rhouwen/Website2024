@@ -1,6 +1,6 @@
 from solanacoins import app, db
 from flask import render_template, redirect, request, url_for, flash
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user, current_user
 from solanacoins.models import User, SolanaCoin
 from solanacoins.forms import LoginForm, RegistrationForm
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -10,9 +10,10 @@ from werkzeug.security import generate_password_hash, check_password_hash
 def home():
     return render_template('home.html')
 
-@app.route('/getcoin')
-def index():
-    coins = SolanaCoin.query.all()
+@app.route('/welkom')
+@login_required
+def welkom():
+    coins = SolanaCoin.query.all() 
     return render_template('welkom.html', coins=coins)
 
 @app.route('/add_coin', methods=['POST'])
@@ -27,20 +28,19 @@ def add_coin():
     db.session.add(new_coin)
     db.session.commit()
 
-    return redirect(url_for('index'))
+    return redirect(url_for('welkom'))
 
 @app.route('/delete_coin/<int:coin_id>', methods=['POST'])
+@login_required
 def delete_coin(coin_id):
     coin = SolanaCoin.query.get_or_404(coin_id)
-    db.session.delete(coin)
-    db.session.commit()
-    return redirect(url_for('index'))
+    if current_user.username == 'test123':  
+        db.session.delete(coin)
+        db.session.commit()
+        return redirect(url_for('welkom'))
+    else:
+        return redirect(url_for('welkom', error='true'))
 
-
-@app.route('/welkom')
-@login_required
-def welkom():
-    return render_template('welkom.html')
 
 
 @app.route('/logout')
@@ -73,6 +73,9 @@ def login():
 
             return redirect(next)
     return render_template('login.html', form=form)
+
+from flask import request
+
 
 
 @app.route('/register', methods=['GET', 'POST'])

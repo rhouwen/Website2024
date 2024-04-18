@@ -17,15 +17,18 @@
   <div class="row">
     <div class="col">
       <h2>Muntenlijst</h2>
+      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addCoinModal">
+        Munt Toevoegen
+      </button>
       <table class="table">
         <thead>
             <tr>
               <th scope="col">Ticker</th>
               <th scope="col">Naam</th>
-              <th scope="col">Huidige Prijs</th>
-              <th scope="col">Huidige Marketcap</th>
+              <th scope="col">Prijs</th>
+              <th scope="col">Marketcap</th>
               <th scope="col">Reden</th>
-              <th scope="col"></th> <!-- Voeg een lege kop toe voor de verwijderknop -->
+              <th scope="col"></th> 
             </tr>
           </thead>
           <tbody>
@@ -36,14 +39,17 @@
               <td>{{ coin.current_price }}</td>
               <td>{{ coin.current_market_cap }}</td>
               <td>{{ coin.reason }}</td>
-              <td> <!-- Voeg een kolom toe voor de verwijderknop -->
+              <td> 
                 <form method="POST" action="{{ url_for('delete_coin', coin_id=coin.id) }}">
                   <button type="submit" class="btn btn-danger">Verwijderen</button>
+                  
                 </form>
               </td>
             </tr>
             {% endfor %}
           </tbody>
+          <td>
+        </td>
       </table>
     </div>
   </div>
@@ -60,11 +66,11 @@
           <input type="text" class="form-control" id="name" name="name" required>
         </div>
         <div class="form-group">
-          <label for="current_price">Huidige Prijs</label>
+          <label for="current_price">Prijs</label>
           <input type="text" class="form-control" id="current_price" name="current_price" required>
         </div>
         <div class="form-group">
-          <label for="current_market_cap">Huidige Marketcap</label>
+          <label for="current_market_cap">Marketcap</label>
           <input type="text" class="form-control" id="current_market_cap" name="current_market_cap" required>
         </div>
         <div class="form-group">
@@ -76,5 +82,36 @@
     </div>
   </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        // Controleren of de boodschap aanwezig is in de querystring
+        var error = new URLSearchParams(window.location.search).get('error');
+        if (error) {
+            // Toon een modaal venster met de foutmelding
+            $('#errorModal').modal('show');
+        }
+    });
+</script>
+
+
+
+<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModalLabel">Fout</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Je hebt niet de juiste rechten om deze actie uit te voeren.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Oké</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}
