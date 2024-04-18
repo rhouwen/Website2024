@@ -1,7 +1,7 @@
 from solanacoins import app, db
 from flask import render_template, redirect, request, url_for, flash
 from flask_login import login_user, login_required, logout_user
-from solanacoins.models import User
+from solanacoins.models import User, SolanaCoin
 from solanacoins.forms import LoginForm, RegistrationForm
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -9,6 +9,32 @@ from werkzeug.security import generate_password_hash, check_password_hash
 @app.route('/')
 def home():
     return render_template('home.html')
+
+@app.route('/getcoin')
+def index():
+    coins = SolanaCoin.query.all()
+    return render_template('welkom.html', coins=coins)
+
+@app.route('/add_coin', methods=['POST'])
+def add_coin():
+    ticker = request.form['ticker']
+    name = request.form['name']
+    current_price = float(request.form['current_price'])
+    current_market_cap = float(request.form['current_market_cap'])
+    reason = request.form['reason']
+
+    new_coin = SolanaCoin(ticker=ticker, name=name, current_price=current_price, current_market_cap=current_market_cap, reason=reason)
+    db.session.add(new_coin)
+    db.session.commit()
+
+    return redirect(url_for('index'))
+
+@app.route('/delete_coin/<int:coin_id>', methods=['POST'])
+def delete_coin(coin_id):
+    coin = SolanaCoin.query.get_or_404(coin_id)
+    db.session.delete(coin)
+    db.session.commit()
+    return redirect(url_for('index'))
 
 
 @app.route('/welkom')
@@ -29,25 +55,19 @@ def logout():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        # Grab the user from our User Models table
+
         user = User.query.filter_by(email=form.email.data).first()
 
-        # Check that the user was supplied and the password is right
-        # The verify_password method comes from the User object
-        # https://stackoverflow.com/questions/2209755/python-operation-vs-is-not
-
         if user.check_password(form.password.data) and user is not None:
-            # Log in the user
+          
 
             login_user(user)
             flash('Logged in successfully.')
 
-            # If a user was trying to visit a page that requires a login
-            # flask saves that URL as 'next'.
+       
             next = request.args.get('next')
 
-            # So let's now check if that next exists, otherwise we'll go to
-            # the welcome page.
+         
             if next == None or not next[0] == '/':
                 next = url_for('welkom')
 

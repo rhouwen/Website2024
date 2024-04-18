@@ -11,7 +11,6 @@ def load_user(user_id):
 
 
 class User(db.Model, UserMixin):
-    # Maak een tabel aan in de database
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -26,6 +25,23 @@ class User(db.Model, UserMixin):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+    
+class SolanaCoin(db.Model):
+    __tablename__ = 'solana_coins'
+
+    id = db.Column(db.Integer, primary_key=True)
+    ticker = db.Column(db.String(6), nullable=False)
+    name = db.Column(db.String(64), nullable=False)
+    current_price = db.Column(db.Float, nullable=False)
+    current_market_cap = db.Column(db.Float, nullable=False)
+    reason = db.Column(db.Text)
+
+    def __init__(self, ticker, name, current_price, current_market_cap, reason):
+        self.ticker = ticker
+        self.name = name
+        self.current_price = current_price
+        self.current_market_cap = current_market_cap
+        self.reason = reason
 
 
 db.create_all()

@@ -1,6 +1,80 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="jumbotron">
-    <p>Gefeliciteerd! Inloggen gelukt!</p>
+<div class="p-5 text-center bg-image rounded-0 position-relative" style="
+    background-image: url('https://www.analyticsinsight.net/wp-content/uploads/2023/10/Screenshot-2023-10-19-142942.png');
+    height: 400px;
+  ">
+  <div class="mask position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.6);"></div>
+  <div class="d-flex justify-content-center align-items-center h-100 position-relative">
+    <div class="text-white">
+      <h1 class="mb-3">Solcoin</h1>
+      <h4 class="mb-3">Filter hieronder tussen de beste memecoins</h4>
+    </div>
+  </div>
 </div>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col">
+      <h2>Muntenlijst</h2>
+      <table class="table">
+        <thead>
+            <tr>
+              <th scope="col">Ticker</th>
+              <th scope="col">Naam</th>
+              <th scope="col">Huidige Prijs</th>
+              <th scope="col">Huidige Marketcap</th>
+              <th scope="col">Reden</th>
+              <th scope="col"></th> <!-- Voeg een lege kop toe voor de verwijderknop -->
+            </tr>
+          </thead>
+          <tbody>
+            {% for coin in coins %}
+            <tr>
+              <td>{{ coin.ticker }}</td>
+              <td>{{ coin.name }}</td>
+              <td>{{ coin.current_price }}</td>
+              <td>{{ coin.current_market_cap }}</td>
+              <td>{{ coin.reason }}</td>
+              <td> <!-- Voeg een kolom toe voor de verwijderknop -->
+                <form method="POST" action="{{ url_for('delete_coin', coin_id=coin.id) }}">
+                  <button type="submit" class="btn btn-danger">Verwijderen</button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col">
+      <h2>Munt Toevoegen</h2>
+      <form method="POST" action="{{ url_for('add_coin') }}">
+        <div class="form-group">
+            <label for="name">Ticker</label>
+            <input type="text" class="form-control" id="ticker" name="ticker" required>
+          </div>
+        <div class="form-group">
+          <label for="name">Naam</label>
+          <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="current_price">Huidige Prijs</label>
+          <input type="text" class="form-control" id="current_price" name="current_price" required>
+        </div>
+        <div class="form-group">
+          <label for="current_market_cap">Huidige Marketcap</label>
+          <input type="text" class="form-control" id="current_market_cap" name="current_market_cap" required>
+        </div>
+        <div class="form-group">
+          <label for="reason">Reden</label>
+          <textarea class="form-control" id="reason" name="reason" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Toevoegen</button>
+      </form>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
