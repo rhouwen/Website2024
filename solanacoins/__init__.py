@@ -11,6 +11,7 @@ app = Flask(__name__)
 
 # Vaak worden deze coderegels in een apart config.py-bestand ondergebracht
 app.config['SECRET_KEY'] = 'DITISeengeheimeSLEUTELhasuhwenc[wec3324#(*$&(#@)*$)]'
+app.config['WTF_CSRF_ENABLED'] = False
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
